@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>CandyFund</title>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+		<meta name="keywords" content="" />
+		<meta name="description" content="" />
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+		<link rel="stylesheet" type="text/css" href="css/pie.css" />
+		<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Exo+2:400,300,700|Montserrat:400,700" />
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				var reentered = false;
+				
+				function drop(element) {
+					var delayTime = 250;
+					var v = element.addClass('dropmenu');
+					v.find('>li:has(ul)').addClass('dropmenu-trigger')
+						.find('ul').addClass('dropmenu-submenu').hide();
+					v.find('>li:has(div)').addClass('dropmenu-click')
+						.find('div').addClass('dropmenu-submenu').hide();
+					
+					element.on('click', '>li:has(div) > a', function() {
+						var wasOpen = $(this).parents('li').hasClass('dropmenu-open');
+						$(this).parents('li').parents('ul').removeClass('openmenu');
+						$(this).parents('li').removeClass('dropmenu-open');
+						//$(this).parents('li').find('div').delay(delayTime).hide();
+						
+						if(wasOpen)
+						{
+							return false;
+						}
+						
+						//$(this).parents('li').find('div').show();
+						$(this).parents('li').addClass('dropmenu-open');
+						$(this).parents('li').parents('ul').addClass('openmenu');
+						return false;
+					});
+					element.on('mouseenter', function() {
+						$(this).find('.dropmenu-submenu').show();
+						reentered = true;
+					});
+					element.on('mouseleave', function() {
+						var v = $(this);
+						reentered = false;
+						setTimeout(function() {
+							if (!reentered)
+							{
+								v.find('.dropmenu-submenu').hide();
+							}
+						}, delayTime);
+					});
+					element.on('mouseenter', '>li:has(ul) > a', function() {
+						if($(this).parents('li').hasClass('dropmenu-open'))
+						{
+							return false;
+						}
+						
+						var v2 = $(this).parents('li');
+						//v2.find('ul').show();
+						$('.dropmenu-open').removeClass('dropmenu-open');//.delay(delayTime).find('ul').hide();
+						v2.addClass('dropmenu-open');
+                        return false;
+					});
+					element.find('li').on('mouseleave', function() {
+						$(this).parents('ul').removeClass('openmenu');
+						$(this).removeClass('dropmenu-open');//.delay(delayTime).find('.dropmenu-submenu').hide();
+					});
+				}
+				
+				drop($('#menu'));
+			});
+		</script>
+	</head>
+	<body>
+		<div id="hd">
+			<header>
+				<h1><a href="#"><img src="images/candystuff.png" onmouseout="this.src='images/candystuff.png'" onmouseover="this.src='images/candystuff_hover.png'" width="225px" height="80px" alt="CandyFund" /></a></h1>
+				<nav>
+					<ul id="menu">
+						<li class="selected"><a href="#">Home</a></li>
+						<li id="gamemenu"><a href="#">Games</a>
+							<ul class="dropmenu-submenu">
+								<li><a href="#">Test for win</a></li>
+								<li><a href="#">Test</a></li>
+								<li><a href="#">Test</a></li>
+							</ul>
+						</li>
+						<li><a href="#">Lottery</a></li>
+						<li><a href="#">FAQ</a></li>
+						<li><a href="#">Forum</a></li>
+						<li class="right login" id="logindrop"><a href="#">Log In</a>
+							<div class="dropmenu-submenu">
+								<form action="#" autocomplete="on">
+								Username: <input type="text" name="username"><br />
+								Password: <input type="password" name="password"><br />
+								<input type="submit" />
+								</form>
+							</div>
+						</li>
+						<li class="right"><a href="#">Settings</a></li>
+					</ul>
+				</nav>
+				<section id="userinfo">
+					<h3>Welcome, BarkyDoggo</h3>
+					<div id="usermoney"><a href="#">0 BTC</a></div>
+				</section>
+			</header>
+		</div>
+		<div id="container">
+			<div id="content-container">
+				<div id="content">
+					<section id="games">
+						<section class="path-finder">
+							<a href="#">
+								<h2>Game #1</h2>
+								<img src="images/Bitcoin.png" width="50px" />
+								<div class="info">Test your luck</div>
+							</a>
+							<a href="#">
+								<h2>Game #2</h2>
+								<img src="images/Bitcoin.png" width="50px" />
+								<div class="info">Test your luck</div>
+							</a>
+							<a href="#">
+								<h2>Game #3</h2>
+								<img src="images/Bitcoin.png" width="50px" />
+								<div class="info">Test your luck</div>
+							</a>
+							<a href="#">
+								<h2>Game #4</h2>
+								<img src="images/Bitcoin.png" width="50px" />
+								<div class="info">Test your luck</div>
+							</a>
+							<a href="#">
+								<h2>Game #5</h2>
+								<img src="images/Bitcoin.png" width="50px" />
+								<div class="info">Test your luck</div>
+							</a>
+						</section>
+					</section>
+					<section id="newsblock">
+						<div class="hl">LOTTERY</div>
+						<article class="newsblock" id="drawday02262014">
+							<header>
+								<time pubdate="pubdate">02/26/2014</time>
+								<h3>Drawings for February 26th, 2014</h3>
+								<a href="#"><img src="images/crossm.png" onmouseout="this.src='images/crossm.png'" onmouseover="this.src='images/crossm_hover.png'" alt="Dismiss" class="newsblockdismiss" /></a>
+							</header>
+							<div class="lotto-drawing left">
+								<div class="id"><span>Winning ticket</span></div>
+								<div class="results">
+									<span>12</span>
+									<span>25</span>
+									<span>96</span>
+									<span>10</span>
+									<span>30</span>
+								</div>
+							</div>
+							<div class="lotto-navigate left">
+								<div class="buttons">
+									<a href="#" class="last">Last ticket</a>
+									<a href="#" class="next">Next ticket</a>
+								</div>
+								<div class="id">
+									<span class="mismatch">Loss</span>
+									<span class="right">1 / 1</span>
+								</div>
+							</div>
+							<div class="lotto-drawing-player right">
+								<div class="id" style="text-align: right;"><span>Your ticket</span></div>
+								<div class="results">
+									<span class="match">12</span>
+									<span class="match">25</span>
+									<span class="mismatch">14</span>
+									<span class="mismatch">38</span>
+									<span class="match">30</span>
+								</div>
+							</div>
+							<div class="clear2">&nbsp;</div>
+						</article>
+						<div class="hl">NEWS</div>
+						<article class="newsblock">
+							<header>
+								<time pubdate="pubdate">02/26/2014</time>
+								<h3>Grand Opening</h3>
+							</header>
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec mattis justo euismod dui volutpat dapibus. Vivamus lobortis nunc id justo ullamcorper elementum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Praesent sed imperdiet massa. Duis sit amet facilisis arcu. Fusce rutrum mi sapien, sit amet euismod nibh rutrum in. Nam dolor erat, mattis sed justo vitae, pulvinar tempor nisi. Pellentesque volutpat nisi neque, eget posuere turpis ultricies eget. In pharetra, mauris a iaculis mollis, mi lacus vulputate lorem, non elementum massa lorem ac urna. Sed ut semper sem. Nulla vitae lectus et ligula euismod aliquet. Vestibulum in erat ultricies, aliquet massa et, vehicula neque. Donec quis est vitae ante congue ultrices. Aenean tincidunt erat ut augue congue placerat. Aenean blandit massa ut turpis fermentum, lobortis convallis dui mattis.</p>
+							<footer>
+								Posted by <a href="#">BarkyDoggo</a>
+							</footer>
+						</article>
+						<article class="newsblock">
+							<header>
+								<h3>Older News</h3>
+							</header>
+							<table id="oldnews">
+								<tr>
+									<td><a href="#">Something awesome we did</a></td>
+									<td class="oldate">02/25/2014</td>
+								</tr>
+								<tr class="alt">
+									<td><a href="#">Some old news article</a></td>
+									<td class="oldate">02/23/2014</td>
+								</tr>
+								<tr>
+									<td><a href="#">Great news article, must read!</a></td>
+									<td class="oldate">02/20/2014</td>
+								</tr>
+							</table>
+						</article>
+					</section>
+				</div>
+				<div id="playinfoarea">
+					<section id="playinfo">
+						<div id="playinfotr">
+							<div id="playinfotd">
+								<article id="provablyfair">
+									<h3>Provably Fair</h3>
+									<p>Guaranteed to be fair. Verify it for yourself.</p>
+								</article>
+							</div>
+							<div id="playinfotd">
+								<article id="nodownload">
+									<h3>No Downloads</h3>
+									<p>Just pick a game and play right in your browser.</p>
+								</article>
+							</div>
+							<div id="playinfotd">
+								<article id="instantplay">
+									<h3>Play Instantly</h3>
+									<p>Deposits and withdrawals are processed as soon as we get them.</p>
+								</article>
+							</div>
+							<div id="playinfotd">
+								<article id="lottery">
+									<h3>Lottery</h3>
+									<p>Get tickets for your chance at the jackpot.</p>
+								</article>
+							</div>
+						</div>
+					</section>
+				</div>
+				<footer id="mainfoot">
+					<ul class="left">
+						<li><a href="#">Home</a></li>
+						<li><a href="#">FAQ</a></li>
+						<li><a href="#">Terms of Service</a></li>
+						<li><a href="#">Support</a></li>
+					</ul>
+					<div class="right">&copy; 2014 <a href="#">CandyFund</a></div>
+				</footer>
+			</div>
+		</div>
+	</body>
+</html>
